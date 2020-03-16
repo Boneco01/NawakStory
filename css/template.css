@@ -1,0 +1,69 @@
+/* --- Police personnalisée --- */
+
+@font-face {
+  font-family: "NawakPolice";
+  src: url('polices/enchanted_land/Enchanted Land.otf');
+}
+
+/* --- Body --- */
+
+body {
+	background: url(../images/background.jpg) no-repeat;
+	background-size: cover;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	font-family: "NawakPolice" !important;
+	width: 1024px;
+}
+
+/* --- Header --- */
+
+header {
+	background-color: #716c5b;
+}
+
+header a {
+	text-decoration: none !important;
+}
+
+header a h1 {
+	font-size: 60px;
+	margin: auto;
+}
+
+/* --- Nav --- */
+
+nav {
+	background-color: #cfb19e;
+	font-size: 30px;
+}
+
+#collapsibleNavbar .navlink  {
+	color: white !important;
+}
+
+#collapsibleNavbar .navlink:hover {
+	color: #905F2F !important;
+	text-decoration: underline;
+}
+
+/* --- Section --- */
+
+section {
+	background-color: gainsboro !important;
+}
+
+/* --- Footer --- */
+
+footer {
+	background-color: #716c5b;
+	font-size: 25px;
+}
+
+/* --- Format mobile --- */
+
+@media screen and (max-width: 1024px) {
+ 	body{
+ 		width: 100%;
+ 	}
+}

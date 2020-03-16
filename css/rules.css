@@ -1,0 +1,14 @@
+/* --- Section --- */
+
+section div p {
+	font-family: arial;
+	font-size: 13px;
+}
+
+.lightDiv {
+	background-color: lightgrey !important;
+}
+
+.darkDiv {
+	background-color: darkgrey !important;
+}

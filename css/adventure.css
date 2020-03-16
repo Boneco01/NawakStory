@@ -1,0 +1,58 @@
+/* --- Section --- */
+
+#adventureText p {
+	font-family: arial !important;
+	font-size: 13px;
+}
+
+#adventureImg img {
+	margin-left: 12.5%;
+	transition-duration: 1s;
+	transition-property: filter, opacity;
+}
+
+#adventureImg button {
+	background-color: lightsalmon;
+	border: none;
+	border-radius: 5px;
+	margin-left: 39%;
+	margin-top: 25%;
+	opacity: 0;
+	transition-duration: 1s;
+	transition-property: opacity;
+}
+
+#adventureImg:hover img {
+	filter: blur(1px);
+	opacity: 0.5;
+}
+
+#adventureImg:hover button {
+	opacity: 1;
+}
+
+.my-custom-scrollbar {
+	height: 200px;
+	overflow: auto;
+	position: relative;
+}
+
+.table-wrapper-scroll-y {
+	display: block;
+}
+
+@media screen and (max-width: 1024px) {
+	#adventureSelect {
+		display: block;
+		padding-bottom: 30% !important;
+	}
+
+	#adventureText {
+		width: 1024px !important;
+	}
+
+	#adventureImg {
+		height: 75% !important;
+		width: 75% !important;
+	}
+}

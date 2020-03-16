@@ -1,0 +1,27 @@
+/* --- Section --- */
+
+section p {
+	font-family: arial;
+	font-size: 15px;
+}
+
+.chronicleImg img {
+	height: 320px;
+}
+
+.chronicleText {
+	background-color: #CECECE;
+}
+
+.chronicleText p {
+	font-family: arial;
+	font-size: 15px !important;
+	width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+	.chronicleText p {
+		font-family: arial;
+		font-size: 10px !important;
+	}
+}

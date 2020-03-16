@@ -1,0 +1,47 @@
+/* --- Section --- */
+
+
+/* Quand le personnage n'est pas créé */
+
+.textIntro {
+	font-size: 20px;
+	margin-left: 12.5%;
+}
+
+.statChoice {
+	margin-left: 12.5%;
+}
+
+
+/* Quand le personnage est créé */
+
+#stats {
+	background-color: lightgrey;
+}
+
+#stats h3 {
+	padding-bottom: 10px;
+}
+
+.valStats {
+	font-size: 20px;
+	padding-left: 40%;
+}
+
+#inventory {
+	font-size: 20px;
+	margin-left: 0px;
+}
+
+#shopTitle {
+	background-color: lightgrey;
+}
+
+#shop {
+	background-color: lightgrey;
+	margin-left: 0px;
+}
+
+#shop img {
+	width: 100px;
+}

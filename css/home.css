@@ -1,0 +1,99 @@
+/* --- Section --- */
+
+section {
+	font-family: helvetica !important;
+}
+
+section h2 {
+	font-family: "NawakPolice";
+	font-size: 35px;
+}
+
+#imgHome {
+	height: 510px;
+}
+
+#chronicle {
+	text-decoration: none;
+}
+
+#chronicleImg {
+	transition-duration: 1s;
+	transition-property: filter, opacity;
+	z-index: 1;
+}
+
+#chronicleText {
+	font-size: 20px;
+	margin-left: 28%;
+	margin-top: 45%;
+	opacity: 0;
+	transition-duration: 1s;
+	transition-property: opacity;
+	z-index: 2;
+}
+
+#chronicle:hover img {
+	filter: blur(4px);
+	opacity: 0.5;
+}
+
+#chronicle:hover span {
+	opacity: 1;
+}
+
+#adventure {
+	text-decoration: none;
+}
+
+#adventureImg {
+	transition-duration: 1s;
+	transition-property: filter, opacity;
+	z-index: 1;
+}
+
+#adventureText {
+	font-size: 20px;
+	margin-left: 33%;
+	margin-top: 45%;
+	opacity: 0;
+	transition-duration: 1s;
+	transition-property: opacity;
+	z-index: 2;
+}
+
+#adventure:hover img {
+	filter: blur(4px);
+	opacity: 0.5;
+}
+
+#adventure:hover span {
+	opacity: 1;
+}
+
+@media screen and (max-width: 1024px) {
+	#imgHome {
+		height: 255px;
+		margin-top: 80px !important;
+	}
+
+	#adventure {
+		height: 100%;
+		width:100%;
+	}
+
+	#chronicle {
+		height: 100%;
+		width:100%;
+	}
+
+	#adventureText {
+		margin-left: 15%;
+		margin-top: 45%;
+	}
+	
+	#chronicleText {
+		margin-left: 2%;
+		margin-top: 45%;
+	}
+}

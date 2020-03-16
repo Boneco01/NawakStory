@@ -1,0 +1,54 @@
+/* --- Section --- */
+
+section {
+	background: url("../images/backgroundDiv.jpg") no-repeat;
+	background-size: cover;
+}
+
+#parchmentBackground {
+	background: url("../images/parchemin.png") no-repeat center;
+	background-size: cover;
+}
+
+#parchment p {
+	font-size: 24px;
+}
+
+#parchment h2 {
+	font-size: 40px !important;
+}
+
+.fields {
+	border: none;
+	background-color: #FAF0C5;
+	border-radius: 5px;
+}
+
+#field1 {
+	margin-left: 22%;
+}
+
+#field2 {
+	margin-left: 5%;
+}
+
+form button {
+	border: solid 1px white !important;
+}
+
+form button:hover {
+	background-color : #DFF2FF;
+	border: solid 1px black !important;
+	transition: 1s;
+}
+
+#redirection {
+	font-size: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+	#parchmentBackground {
+		background: url("../images/parchemin.png") center no-repeat;
+		background-size: 1024px;
+	}
+}
