@@ -34,42 +34,73 @@
 			return $echo;
     	}
 
-		function recupListePersosFiltre($est_heros, $id_lien) {
-			if(intval($id_lien) == 0) {
-				$req = self::$bdd->prepare('SELECT id_carte, img_carte_petite FROM Carte WHERE est_heros = :est_heros');
-				$tuple = array(':est_heros' => $est_heros);
-			} else {
-				$req = self::$bdd->prepare('SELECT id_carte, img_carte_petite FROM Carte INNER JOIN possede_lien using(id_carte) WHERE est_heros = :est_heros AND id_lien = :id_lien');
-				$tuple = array(':est_heros' => $est_heros, ':id_lien' => intval($id_lien));
-			}
-			$req->execute($tuple);
-			$tab = $req->fetchAll();
-			return $tab;
-    	}
-
-    	function afficheListe($listePerso) {
-
-            $tailleListe = count($listePerso);
-            $affichageListe = "";
-
-            for($i=0;$i<$tailleListe;$i++) {
-                $affichageListe = $affichageListe . "<a href=\"index.php?mod=personnage&option=detailPerso&id=". $listePerso[$i][0] ."\"><img src=\"". $listePerso[$i][1] ."\" alt=\"#\" class=\"imgtab\"></a>";
-            }
-
-            return $affichageListe;
-
-        }
-
-        function recupIdUtilisateur($nom_utilisateur) {
-
-			$req = self::$bdd->prepare('SELECT id_utilisateur FROM Utilisateur WHERE nom_utilisateur = :nom_utilisateur');
-			$tuple = array(':nom_utilisateur' => $nom_utilisateur);
-			$req->execute($tuple);
+    	function afficheDetailObjetBoutique($id_objet) {
+			$req = self::$bdd->prepare('SELECT * FROM objet WHERE id_objet = :id_objet');
+			$tuple = array(':id_objet' => intval($id_objet));
+			$result = $req->execute($tuple);
 
 			$tab = $req->fetch();
-			return $tab[0];
+			$echo = 
+			"
+				<h2>". $tab[1] ."</h2>
+				<img src=\"". $tab[2] ."\" alt=\"#\" class=\"mx-auto d-block\" style=\"width: 200px\">
+				<p class=\"mx-auto d-block\">". $tab[4] ."</p>
+				<button id=". $tab[0] ." class=\"boutonAchat mx-auto d-block\">Acheter : <span id=\"prix\"> ". $tab[3] ." </span></button>
+			";
+			return $echo;
+    	}
 
-        }
+    	function afficheDetailObjetSac($id_objet) {
+			$req = self::$bdd->prepare('SELECT * FROM objet WHERE id_objet = :id_objet');
+			$tuple = array(':id_objet' => intval($id_objet));
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			$echo = 
+			"
+				<h2>". $tab[1] ."</h2>
+				<img src=\"". $tab[2] ."\" alt=\"#\" class=\"mx-auto d-block\" style=\"width: 200px\">
+				<p class=\"mx-auto d-block\">". $tab[4] ."</p>
+			";
+			return $echo;
+    	}
+
+    	function acheterObjet($id_objet, $id_aventurier) {
+
+    		$req = self::$bdd->prepare('SELECT or_aventurier FROM aventurier WHERE id_aventurier = :id_aventurier');
+    		$tuple = array(':id_aventurier' => $id_aventurier);
+			$result = $req->execute($tuple);
+			$orAventurier = $req->fetch();
+
+			$req = self::$bdd->prepare('SELECT prix_objet FROM objet WHERE id_objet = :id_objet');
+    		$tuple = array(':id_objet' => $id_objet);
+			$result = $req->execute($tuple);
+			$prixObjet = $req->fetch();
+
+			$req = self::$bdd->prepare('INSERT INTO sac (id_aventurier, id_objet) VALUES (:id_aventurier, :id_objet)');
+			$tuple = array(':id_aventurier' => $id_aventurier, 'id_objet' => $id_objet);
+			$result = $req->execute($tuple);
+
+			$updateOrAventurier = intval($orAventurier[0]) - intval($prixObjet[0]);
+
+			$req = self::$bdd->prepare('UPDATE aventurier SET or_aventurier = :or_aventurier WHERE id_aventurier = :id_aventurier');
+			$tuple = array(':or_aventurier' => $updateOrAventurier, ':id_aventurier' => $id_aventurier);
+			$result = $req->execute($tuple);
+    	}
+
+    	function checkAchat($id_objet, $id_aventurier) {
+    		$req = self::$bdd->prepare('SELECT or_aventurier FROM aventurier WHERE id_aventurier = :id_aventurier');
+    		$tuple = array(':id_aventurier' => $id_aventurier);
+			$result = $req->execute($tuple);
+			$orAventurier = $req->fetch();
+
+			$req = self::$bdd->prepare('SELECT prix_objet FROM objet WHERE id_objet = :id_objet');
+    		$tuple = array(':id_objet' => $id_objet);
+			$result = $req->execute($tuple);
+			$prixObjet = $req->fetch();
+
+			return intval($orAventurier[0]) - intval($prixObjet[0]);
+    	}
 		
 	}
 
