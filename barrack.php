@@ -34,6 +34,59 @@
 			$tab = $req->fetch();
 			return $tab;
 		}
+
+		function getBoutique() {
+			$req = self::$bdd->prepare('SELECT * FROM objet INNER JOIN bpossedeo using(id_objet) WHERE id_boutique = 1');
+			$result = $req->execute();
+
+			$tab = $req->fetchAll();
+			$tailleTab = count($tab);
+			$tabFinal = array_slice($tab, $tailleTab-4);
+			return $tabFinal;
+		}
+
+		function getSac($id_aventurier) {
+			$req = self::$bdd->prepare('SELECT * FROM objet INNER JOIN sac using(id_objet) WHERE id_aventurier = :id_aventurier');
+			$tuple = array(":id_aventurier" => $id_aventurier);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetchAll();
+			return $tab;
+		}
+
+		function affichageSac($monSac) {
+			$affichageSac = "";
+			$tailleListe = count($monSac);
+			for($i = 0; $i < $tailleListe; $i++) {
+				$affichageSac = $affichageSac . "<img id=\"". $monSac[$i][0] ."\" class=\"imgObjetSac imgClickable\" src=\"". $monSac[$i][2] ."\" alt=\"#\">";
+			}
+
+			return $affichageSac;
+		}
+
+		function affichageBoutique($monSac, $maBoutique) {
+			$affichageBoutique = "";
+			$tailleBoutique = count($maBoutique);
+			$tailleSac = count($monSac);
+			$objetPossede;
+			for($i = 0; $i < $tailleBoutique; $i++) {
+				$objetPossede = 0;
+				for($j = 0; $j < $tailleSac; $j++) {
+					if($maBoutique[$i][0] == $monSac[$j][0]) {
+						$objetPossede = 1;
+					}
+				}
+				if($objetPossede == 1) {
+					$affichageBoutique = $affichageBoutique . "<img id=\"". $maBoutique[$i][0] ."\" src=\"". $maBoutique[$i][2] ."\" alt=\"#\" class=\"imgObjetBoutique imgUnclickable col px-5 mt-3 mb-3\">";
+				} else {
+					$affichageBoutique = $affichageBoutique . "<img id=\"". $maBoutique[$i][0] ."\" src=\"". $maBoutique[$i][2] ."\" alt=\"#\" class=\"imgObjetBoutique imgClickable col px-5 mt-3 mb-3\">";
+				}
+				
+			}
+
+			return $affichageBoutique;
+
+		}
 	}
 
 	/* --- --- --- --- --- */
@@ -169,8 +222,14 @@
 		";
 	} else {
 		$monPersonnage = $maCaserne->getPersonnage();
+		$maBoutique = $maCaserne->getBoutique();
+		$monSac = $maCaserne->getSac($monPersonnage[0]);
+		$affichageSac = $maCaserne->affichageSac($monSac);
+		$affichageBoutique = $maCaserne->affichageBoutique($monSac, $maBoutique);
 		$maPage = "
+
 			<div id=\"perso\" class=\"py-3 text-center\">
+				<span id=\"idPersonnage\">" . $monPersonnage[0] . "</span>
 				<h3> Nom d'aventurier : " . $monPersonnage[1] . " </h3>
 
 				<div id=\"stats\" class=\"mt-4 pb-4 mx-auto\">
@@ -203,20 +262,37 @@
 
 				<h3 class=\"pt-3 mb-3\"> Inventaire </h3>
 
-				<div id=\"inventory\" class=\"mt-2 row w-100\">
-					<span class=\"col\"> Or : " . $monPersonnage[7] . " </span>
-					<span class=\"col\"> Sac : </span>
+				<div id=\"inventory\" class=\"mt-2 row w-100 mx-auto\">
+					<span class=\"col\"> Or : <span id=\"or\"> " . $monPersonnage[7] . " </span></span>
+				</div>
+
+				<div id=\"items\">
+					<tr>
+					<th scope=\"col\">
+						". $affichageSac ."
+					</th>
+				</tr>
 				</div>
 
 				<h3 id=\"shopTitle\" class=\"mt-3 pt-3 mb-n1\"> Boutique </h3>
 
 				<div id=\"shop\" class=\"mb-n3 row w-100 mx-auto\">
-					<img src=\"images/placeholder.png\" alt=\"#\" class=\"col px-5\">
-					<img src=\"images/placeholder.png\" alt=\"#\" class=\"col px-5\">
-					<img src=\"images/placeholder.png\" alt=\"#\" class=\"col px-5\">
-					<img src=\"images/placeholder.png\" alt=\"#\" class=\"col px-5\">
+					". $affichageBoutique ."
 				</div>
 			</div>
+
+            <div id=\"monPopup\" class=\"popup\">
+                <!-- Contenu du popup-->
+                <div class=\"contenuPopup\">
+                    <span class=\"fermer\" onclick=\"fermerPopup()\">&times;</span>
+                    <div id=\"infosObjetPopup\">
+                    	<h2>". $maBoutique[0][1] ."</h2>
+                    	<img src=\"". $maBoutique[0][2] ."\" alt=\"#\" class=\"mx-auto d-block\" style=\"width: 200px\">
+                    	<p class=\"mx-auto d-block\">". $maBoutique[0][4] ."</p>
+                    	<button class=\"mx-auto d-block\">Acheter : ". $maBoutique[0][3] ."</button>
+                    </div>
+                </div>
+            </div>
 		";
 	}
 ?>
@@ -232,7 +308,65 @@
 	<body class="mx-auto">
 		<section class="mx-auto">
 			<?php
-				echo($maPage);
+				echo "
+					<script type=\"text/javascript\">
+					function test() {
+						alert(\"test\");
+					}
+
+					function fermerPopup() {
+						var popup = document.getElementById(\"monPopup\");
+						popup.style.display = \"none\";
+					}
+
+					$(\"body\").on('click', \".imgClickable\", function() {
+
+						var objetChoisi = this.id;
+						var isSac;
+						if(this.className == \"imgObjetSac imgClickable\") {
+							isSac = \"1\";
+						} else {
+							isSac = \"0\";
+						}
+
+						$.ajax({
+							dataType: \"json\", 
+							url: \"./ajax/ajax_recup_donnees_objet.php\", 
+							data: {id: objetChoisi, sac: isSac},
+							method: 'GET',
+							success: function(data) {
+								document.getElementById(\"infosObjetPopup\").innerHTML = data;
+							},
+							error: function() {alert (\"erreur\");}
+						});
+
+						var popup = document.getElementById(\"monPopup\");
+						popup.style.display = \"block\";
+
+					});
+
+					$(\"body\").on('click', \".boutonAchat\", function() {
+
+						var objetChoisi = this.id;
+						var personnage = document.getElementById(\"idPersonnage\").innerHTML;
+
+						$.ajax({
+							dataType: \"json\", 
+							url: \"./ajax/ajax_acheter_objet.php\", 
+							data: {idObjet: objetChoisi, idPersonnage: personnage},
+							method: 'GET',
+							success: function(data) {
+								alert(\"Achat effectué !\");
+								window.location.reload(true);
+							},
+							error: function() {alert (\"Vous n'avez pas assez d'or pour acheter cet objet.\");}
+						});
+
+					});
+
+					</script>
+				";
+				echo $maPage;
 			?>
 		</section>
 	</body>
