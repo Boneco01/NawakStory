@@ -24,6 +24,27 @@
 	}
 
 	$tabAventure = $monAventure->getAdventure();
+
+		echo "
+			<script type=\"text/javascript\">
+			$(\"body\").on('click', \".imgChoixAventure\", function() {
+
+				var aventureChoisi = this.id;
+
+				$.ajax({
+					dataType: \"json\", 
+					url: \"./ajax/ajax_recup_donnees_aventure.php\", 
+					data: {id: aventureChoisi},
+					method: 'GET',
+					success: function(data) {
+						document.getElementById(\"detailsAventure\").innerHTML = data;
+					},
+					error: function() {alert (\"erreur\");}
+				});
+
+			});
+			</script>
+		";
 ?>
 
 <!DOCTYPE html>
@@ -36,92 +57,47 @@
 
 	<body class="mx-auto">
 		<section class="pt-3 mx-auto">
-			<h2 class="pb-3 text-center">
-				<?php
-					echo($tabAventure[0][1]);
-				?>
-			</h2>
+			<div id="detailsAventure">
+				<h2 id="titreAventure" class="pb-3 text-center">
+					<?php
+						echo($tabAventure[0][1]);
+					?>
+				</h2>
 
-			<div class="w-100 mx-auto row" id="adventureSelect">
-				<div class="mt-2 text-center w-50 col m-0 p-0 mb-3" id="adventureText">
-					<h3 class="text-center"> Résumé de l'aventure </h3>
-					<p class="mt-3 px-5">
-						<?php
-							echo($tabAventure[0][2]);
-						?>
-					</p>
-				</div>
+				<div class="w-100 mx-auto row" id="adventureSelect">
+					<div class="mt-2 text-center w-50 col m-0 p-0 mb-3" id="adventureText">
+						<h3 class="text-center"> Résumé de l'aventure </h3>
+						<p id="resumeAventure" class="mt-3 px-5">
+							<?php
+								echo($tabAventure[0][2]);
+							?>
+						</p>
+					</div>
 
-				<div class="w-50 mx-auto col m-0 p-0" id="adventureImg">
-					<img src="
-						<?php
-							echo($tabAventure[0][3]);
-						?>
-					" class="w-75 position-absolute">
-					<a href="history.php?id=
-						<?php
-							echo($tabAventure[0][0]);
-						?>
-					&page=1">
-						<button class="w-25 position-absolute text-light"> Commencer </button>
-					</a>
+					<div class="w-50 mx-auto col m-0 p-0" id="adventureImg">
+						<img src="<?php echo($tabAventure[0][3]); ?>" class="w-75 position-absolute">
+						<?php echo "<a href=\"history.php?id=". $tabAventure[0][0] ."&page=1\">
+						<button class=\"w-25 position-absolute text-light\"> Commencer </button></a>" ?>
+					</div>
 				</div>
 			</div>
 
-			<div id="lol" class="mt-5 pb-2 table-wrapper-scroll-y my-custom-scrollbar">
-				<table class="table table-striped mb-0 text-center">
+			<div class="mt-5 pb-2 table-wrapper my-custom-scrollbar" id="">
+				<table class="table">
 					<thead>
-						<tr>
-							<th scope="col">
-								<img src="
-									<?php
-										echo($tabAventure[1][3])
-									?>" 
-								class="w-100">
-							</th>
-							<th scope="col">
-								<img src="
-									<?php
-										echo($tabAventure[1][3]) // Remplacer 1 par 2
-									?>" 
-								class="w-100">
-							</th>
-							<th scope="col">
-								<img src="
-										<?php
-											echo($tabAventure[1][3]) // Remplacer 1 par 3
-										?>" 
-									class="w-100">
-							</th>
-							<th scope="col">
-								<img src="
-									<?php
-										echo($tabAventure[1][3]) // Remplacer 1 par 4
-									?>" 
-								class="w-100">
-							</th>
-						</tr>
+							<?php
+								$tailleListe = count($tabAventure)+1;
+								for($i = 1; $i < $tailleListe; $i++) {
+									echo "
+										<tr>
+											<th scope=\"col\">
+												<img class=\"imgChoixAventure\" id=\"". $i ."\"src=\"".$tabAventure[$i-1][3]."\">
+											</th>
+										</tr>
+									";
+								}
+							?>
 					</thead>
-					<tbody>
-						<tr>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-						</tr>
-						<tr>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-						</tr>
-						<tr>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-							<th scope="col"> # </th>
-						</tr>
-					</tbody>
 				</table>
 			</div>
 		</section>
