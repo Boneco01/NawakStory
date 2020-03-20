@@ -1,9 +1,5 @@
 /* --- Section --- */
 
-#detailsAventure {
-	height: 400px;
-}
-
 #adventureText p {
 	font-family: arial !important;
 	font-size: 13px;
@@ -36,31 +32,13 @@
 }
 
 .my-custom-scrollbar {
-	height: 500px;
+	height: 200px;
 	overflow: auto;
 	position: relative;
 }
 
 .table-wrapper-scroll-y {
 	display: block;
-}
-
-table {
-	width: 100% !important;
-	margin: auto;
-}
-
-table th {
-	text-align: center;
-}
-
-table img {
-	width: 600px !important;
-	height: 350px !important;
-}
-
-table img:hover {
-	cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
@@ -76,10 +54,5 @@ table img:hover {
 	#adventureImg {
 		height: 75% !important;
 		width: 75% !important;
-	}
-
-	table img {
-		width: 300px !important;
-		height: 175px !important;
 	}
 }

@@ -138,28 +138,28 @@
 								<span class=\"text-left col-2\"> Force </span>
 								<span class=\"text-left col-1\"> : </span>
 								<span id=\"force\" name=\"force\" class=\"text-left col-4\"> 8 </span>
-								<input id=\"hiddenForce\" type=\"hidden\" id=\"\" name=\"force\" value=\"\"/> 
+								<input id=\"hiddenForce\" type=\"hidden\" name=\"force\" value=\"\"/> 
 							</div>
 
 							<div class=\"row valStats\">
 								<span class=\"text-left col-2\"> Habileté </span>
 								<span class=\"text-left col-1\"> : </span>
 								<span id=\"habilete\" name=\"habilete\" class=\"text-left col-4\"> 8 </span>
-								<input id=\"hiddenHabilete\" type=\"hidden\" id=\"\" name=\"habilete\" value=\"\"/> 
+								<input id=\"hiddenHabilete\" type=\"hidden\" name=\"habilete\" value=\"\"/> 
 							</div>
 
 							<div class=\"row valStats\">
 								<span class=\"text-left col-2\"> Intelligence </span>
 								<span class=\"text-left col-1\"> : </span>
 								<span id=\"intelligence\" name=\"intelligence\" class=\"text-left col-4\"> 8 </span>
-								<input id=\"hiddenIntelligence\" type=\"hidden\" id=\"\" name=\"intelligence\" value=\"\"/> 
+								<input id=\"hiddenIntelligence\" type=\"hidden\" name=\"intelligence\" value=\"\"/> 
 							</div>
 
 							<div class=\"row valStats\">
 								<span class=\"text-left col-2\"> Chance </span>
 								<span class=\"text-left col-1\"> : </span>
 								<span id=\"chance\" name=\"chance\" class=\"text-left col-4\"> 6 </span>
-								<input id=\"hiddenChance\" type=\"hidden\" id=\"\" name=\"chance\" value=\"\"/> 
+								<input id=\"hiddenChance\" type=\"hidden\" name=\"chance\" value=\"\"/> 
 							</div>
 							<input type=\"submit\" class= \"mt-3\" value=\"Créer le personnage\">
 						</form>

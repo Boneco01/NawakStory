@@ -4,25 +4,12 @@
 	include './connexionBD.php';
 
 	class History extends ConnexionBD {
-		
-		// Fonction pour savoir si l'utilisateur à déjà créé son personnage
 
-		function persoCreate() {
-			$req = self::$bdd->prepare("SELECT stat_force FROM Aventurier WHERE pseudo = :pseudo");
-			$tuple = array(":pseudo" => $_SESSION['pseudo']);
-			$result = $req->execute($tuple);
-
-			$tab = $req->fetchAll();
-			return $tab;
-		}
 	}
 
 	/* --- --- --- --- --- */
 
 	$monHistoire = new History();
-
-	$persoCreate = $monHistoire->persoCreate();
-
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +22,28 @@
 
 	<body class="mx-auto">
 		<section class="mx-auto">
-			
+			<div class="w-75 pb-1 mx-auto">
+				<?php
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+					}
+
+					switch ($id) {
+						case '1':
+						case '2':
+
+							echo "
+								<h2 class=\"py-3 text-center\"> Page n°" . $_GET['page'] . " </h2>
+							";
+							include 'stories/story' . $id . '.php';
+							break;
+						
+						default:
+							header('Location: adventure.php');
+							break;
+					}
+				?>
+			</div>
 		</section>
 
 		<?php
