@@ -13,6 +13,17 @@
 			return $tab;
 		}
 
+		// Fonction pour récupérer le nombre de pièces d'or d'un joueur
+
+		function getOr() {
+			$req = self::$bdd->prepare("SELECT or_aventurier FROM Aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			return $tab;
+		}
+
 		// Fonction pour savoir quel texte est à afficher en fonction de la page sur laquelle l'utilisateur se trouve
 
 		function page($page) {
@@ -27,7 +38,7 @@
 						<a href=\"history.php?id=1&page=4\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Tenter de se faufiler à travers la foule </p></a>
 
 						<p class=\"text-center w-75 mx-auto\"> Au fond de l’auberge, dans le coin le plus sombre, se tient une silhouette encapuchonnée. Celle-ci semble complètement indifférente au brouhaha perpétuel qui occupe le lieu, sirotant doucement sa chope. </p>
-						<a href=\"history.php?id=1&page=?\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’approcher de l’étrange silhouette </p></a>
+						<a href=\"history.php?id=1&page=8\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’approcher de l’étrange silhouette </p></a>
 					";
 					break;
 
@@ -138,10 +149,47 @@
 						";
 					}
 					break;
-					/*
-						<p class=\"text-center w-75 mx-auto\"></p>
-						<a href=\"history.php?id=1&page=6\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"></p></a>
-					*/
+				case "7":
+					echo "
+						<p class=\"text-center w-75 mx-auto\"> Atteignant finalement le centre de d’intérêt général, vous comprenez rapidement ce qui attire tant l’attention des aventuriers. Un tableau des missions, puisque telle est sa fonction, prend place au milieu de l’auberge. Sur celui-ci, quelques affiches proposant diverses missions et autres commandes sont placardés. A bien y regarder, vous remarquez que nombreuses des affiches ont été arrachés, emportés par les plus rapides ou les plus malins. Une affiche cependant semble ne pas avoir été emportée, il serait bon d’en profiter pour vous l’accaparer tant que vous en avez l’occasion. En survolant le texte inscrit sur le papier, vous comprenez qu’il est question d’une enquête au sujet de ruines suspectes. La récompense est élevée à 100 pièces d’or, une offre alléchante pour une première mission ! </p>
+						<a href=\"adventure.php\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\">  Récupérer la fiche et se préparer pour partir à l’aventure </p></a>
+
+					";
+					break;
+				case "8":
+					echo "
+						<p class=\"text-center w-75 mx-auto\"> Vous approchez finalement de l’individu encapuchonné, dont vous ne pouvez distinguer l’expression sous l’ombre de sa capuche. Pourtant, celui-ci semble réagir à votre présence, relevant légèrement la tête alors que vous atteignez sa table. Un ricanement enroué s’élève, entre deux toussotement. </p>
+						<p class=\"text-center w-75 mx-auto\"> “Et bien, et bien, je vois que vous savez flairer les bonnes opportunités. Prenez donc place, et jouez avec moi ! Si vous croyez en votre chance, peut-être parviendrez vous à tirer profit de mon petit jeu…” </p>
+						<p class=\"text-center w-75 mx-auto\"> Déposant doucement sa chope à sa droite, l’étrange personnage dresse son index face à votre visage. </p>
+						<p class=\"text-center w-75 mx-auto\"> “Le jeu est simple, je vais montrer une direction avec mon doigt, et vous devrez faire en sorte de regarder dans une direction opposée. Si jamais vous ne bougez pas, ou bien que vous regardez dans la direction pointé, vous perdez, sinon vous gagnez. Il vous suffit de miser une certaine somme d’argent, dont vous remporterez le double si vous parvenez à me battre, ou bien que vous perdrez si je parviens à vous avoir. Intéressé ?” </p>
+						<a href=\"history.php?id=1&page=9\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Parier 5 pièces d’or </p></a>
+						<a href=\"history.php?id=1&page=1\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
+					";
+					break;
+				case "9":
+					$chance = rand(4, 10);
+
+					if ($this->getOr()[0] - 5 > 0) {
+						echo "
+							<p class=\"text-center w-75 mx-auto\"> Vous n’avez pas assez d’or pour pouvoir jouer, l’être encapuchonné s’enfonce dans sa chaise en attrapant à nouveau sa chope, vous indiquant par son seul geste qu’il n’est plus intéressé par l’idée de jouer avec vous. </p>
+							<a href=\"history.php?id=1&page=1\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
+						";
+					} else if ($this->getStats()[0][3] > $chance) {
+						echo "
+							<p class=\"text-center w-75 mx-auto\"> Visiblement ravi de rencontrer un joueur tel que vous, le maître de ce petit jeu se met à balancer son doigt de droite à gauche doucement, tandis que vous tâchez de rester concentré. Soudain, voilà que sa main se contracte, tandis qu’il s’apprête à pointer une direction. </p>
+							<p class=\"text-center w-75 mx-auto\"> Fort heureusement, dans un réflexe immédiat, vous parvenez à regarder dans une direction opposée au même instant. L’être encapuchonné se met à grogner, tandis qu’il vous tant les 5 pièces d’or que vous avez gagné. </p>
+							<a href=\"history.php?id=1&page=6\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Parier à nouveau 5 pièces d’or </p></a>
+							<a href=\"history.php?id=1&page=6\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
+						";
+					} else {
+						echo "
+							<p class=\"text-center w-75 mx-auto\"> Visiblement ravi de rencontrer un joueur tel que vous, le maître de ce petit jeu se met à balancer son doigt de droite à gauche doucement, tandis que vous tâchez de rester concentré. Soudain, voilà que sa main se contracte, tandis qu’il s’apprête à pointer une direction. </p>
+							<p class=\"text-center w-75 mx-auto\"> Malheureusement, son geste rapide semble vous avoir grandement perturbé, et dans la précipitation vous ne pouvez vous empêcher de regarder dans la direction pointé. L’être encapuchonné se met à ricaner, attrapant votre mise pour la fourrer dans l’une de ses poches. </p>
+							<a href=\"history.php?id=1&page=9\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Parier à nouveau 5 pièces d’or </p></a>
+							<a href=\"history.php?id=1&page=1\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
+						";
+					}
+					break;
 				default: 
 					break;
 			}
@@ -155,7 +203,6 @@
 	if (isset($_GET['page'])) {
 		$page = $_GET['page'];
 		$maPremièreHistoire->page($page);
-		$maPremièreHistoire->getStats();
 	} else {
 		header('Location: adventure.php');
 	}
