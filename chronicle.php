@@ -16,7 +16,7 @@
 				<h2 class="mb-4 text-center"> Chroniques de NawakStory </h2>
 				<h3 class="text-center"> Explications de l'univers </h3>
 
-				<p class="p-3 mx-5 text-center mx-auto w-75"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis iaculis sem, at consectetur mauris aliquam vitae. Aliquam a leo neque. Ut nec finibus tortor, feugiat molestie risus. Donec et lectus rhoncus, iaculis lacus venenatis, laoreet nunc. Donec accumsan nisl feugiat nunc euismod aliquet. Phasellus sollicitudin sit amet elit ac suscipit. Maecenas sit amet nibh aliquet, facilisis ipsum eget, eleifend dolor. Nam laoreet elit erat, sit amet fermentum risus maximus quis. </p>
+				<p class="p-3 mx-5 text-center mx-auto w-75"> Oyez, aventurier, les origines de ce monde fabuleux qu'est Adeyfinir. Ce monde féérique fait office de terre promise pour chaque être en quête de fabuleuses aventures, de gloire comme de richesse. Vous y découvrirez mille et une merveilles, et rencontrerez sans aucun doutes de nombreux compagnons d'armes lors de vos aventures. Ne partez pas en hâte toutefois, puisque si ces terres regorgent de merveilles, d'autres forces bien plus sombres s'y cachent. Vous devrez faire preuve de courage pour espérer y faire vos preuves, y déposer votre marque à jamais. Nombreux sont ceux qui se sont lancés sur ces chemins sinueux, et peu d'entres eux sont entrés dans la légende. Ferez-vous partis des rares élus ? </p>
 
 				<div class="w-100 row mx-auto chronicle">
 					<div class="col m-0 p-0 chronicleImg w-50">
