@@ -75,14 +75,14 @@
 					</div>
 
 					<div class="w-50 mx-auto col m-0 p-0" id="adventureImg">
-						<img src="<?php echo($tabAventure[0][3]); ?>" class="w-75 position-absolute">
+						<img src="<?php echo($tabAventure[0][3]); ?>">
 						<?php echo "<a href=\"history.php?id=". $tabAventure[0][0] ."&page=1\">
-						<button class=\"w-25 position-absolute text-light\"> Commencer </button></a>" ?>
+						<button class=\"position-absolute text-light\"> Commencer </button></a>" ?>
 					</div>
 				</div>
 			</div>
 
-			<div class="mt-5 pb-2 table-wrapper my-custom-scrollbar" id="">
+			<div class="table-wrapper my-custom-scrollbar" id="divChoixAventure">
 				<table class="table">
 					<thead>
 							<?php

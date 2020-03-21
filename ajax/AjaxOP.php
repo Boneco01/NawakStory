@@ -25,9 +25,9 @@
 					</div>
 
 					<div class=\"w-50 mx-auto col m-0 p-0\" id=\"adventureImg\">
-						<img src=\"". $tab[3] ."\" class=\"w-75 position-absolute\">
+						<img src=\"". $tab[3] ."\">
 						<a href=\"history.php?id=". $tab[0] ."&page=1\">
-						<button class=\"w-25 position-absolute text-light\"> Commencer </button></a>
+						<button class=\"position-absolute text-light\"> Commencer </button></a>
 					</div>
 				</div>
 			";

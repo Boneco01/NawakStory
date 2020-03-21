@@ -1,29 +1,51 @@
 /* --- Section --- */
 
 #detailsAventure {
-	height: 400px;
+	background-color: yellow;
+}
+
+#adventureSelect {
+	background-color: red;
+}
+
+#adventureText {
+	background-color: blue;
+	width: 450px !important;
+	display: block !important;
+	margin: auto !important;
+	float: left;
 }
 
 #adventureText p {
 	font-family: arial !important;
 	font-size: 13px;
+	margin: auto !important;
+}
+
+#adventureImg {
+	background-color: green;
+	float: right;
 }
 
 #adventureImg img {
-	margin-left: 12.5%;
+	width: 300px !important;
+	height: 175px !important;
 	transition-duration: 1s;
 	transition-property: filter, opacity;
+	display: block !important;
+	margin: auto !important;
 }
 
 #adventureImg button {
 	background-color: lightsalmon;
+	padding: 5px !important;
 	border: none;
 	border-radius: 5px;
-	margin-left: 39%;
-	margin-top: 25%;
 	opacity: 0;
 	transition-duration: 1s;
 	transition-property: opacity;
+	margin-left: 45% !important;
+	margin-top: -100px !important;
 }
 
 #adventureImg:hover img {
@@ -43,6 +65,13 @@
 
 .table-wrapper-scroll-y {
 	display: block;
+}
+
+#divChoixAventure {
+	margin-top: 50px !important;
+	background-color: cyan;
+	display: block !important;
+	float: bottom !important;
 }
 
 table {
@@ -65,17 +94,46 @@ table img:hover {
 
 @media screen and (max-width: 1024px) {
 	#adventureSelect {
-		display: block;
-		padding-bottom: 30% !important;
+		display: block !important;
+		min-height: 350px !important;
+		max-height: 350px !important;
 	}
 
 	#adventureText {
-		width: 1024px !important;
+		width: 100% !important;
+		min-height: 150px !important;
+		max-height: 150px !important;
+		overflow: auto !important;
+	}
+
+	#adventureText p {
+		width: 80% !important;
 	}
 
 	#adventureImg {
-		height: 75% !important;
-		width: 75% !important;
+		width: 100% !important;
+		margin-top: 20px !important;
+		min-height: 200px !important;
+		max-height: 200px !important;
+		overflow: auto !important;
+	}
+
+	#adventureImg img {
+		width: 300px !important;
+		height: 175px !important;
+	}
+
+	#adventureImg button {
+		opacity: 1;
+	}
+
+	#adventureImg:hover img {
+		filter: blur(0px);
+		opacity: 1;
+	}
+
+	#divChoixAventure {
+		margin-top: 10% !important;
 	}
 
 	table img {
