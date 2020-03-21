@@ -1,15 +1,5 @@
 /* --- Section --- */
-
-#detailsAventure {
-	background-color: yellow;
-}
-
-#adventureSelect {
-	background-color: red;
-}
-
 #adventureText {
-	background-color: blue;
 	width: 450px !important;
 	display: block !important;
 	margin: auto !important;
@@ -23,7 +13,6 @@
 }
 
 #adventureImg {
-	background-color: green;
 	float: right;
 }
 
@@ -69,7 +58,6 @@
 
 #divChoixAventure {
 	margin-top: 50px !important;
-	background-color: cyan;
 	display: block !important;
 	float: bottom !important;
 }
