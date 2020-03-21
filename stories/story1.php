@@ -159,9 +159,9 @@
 				case "8":
 					echo "
 						<p class=\"text-center w-75 mx-auto\"> Vous approchez finalement de l’individu encapuchonné, dont vous ne pouvez distinguer l’expression sous l’ombre de sa capuche. Pourtant, celui-ci semble réagir à votre présence, relevant légèrement la tête alors que vous atteignez sa table. Un ricanement enroué s’élève, entre deux toussotement. </p>
-						<p class=\"text-center w-75 mx-auto\"> “Et bien, et bien, je vois que vous savez flairer les bonnes opportunités. Prenez donc place, et jouez avec moi ! Si vous croyez en votre chance, peut-être parviendrez vous à tirer profit de mon petit jeu…” </p>
+						<p class=\"text-center w-75 mx-auto\"><i> “Et bien, et bien, je vois que vous savez flairer les bonnes opportunités. Prenez donc place, et jouez avec moi ! Si vous croyez en votre chance, peut-être parviendrez vous à tirer profit de mon petit jeu…” </i></p>
 						<p class=\"text-center w-75 mx-auto\"> Déposant doucement sa chope à sa droite, l’étrange personnage dresse son index face à votre visage. </p>
-						<p class=\"text-center w-75 mx-auto\"> “Le jeu est simple, je vais montrer une direction avec mon doigt, et vous devrez faire en sorte de regarder dans une direction opposée. Si jamais vous ne bougez pas, ou bien que vous regardez dans la direction pointé, vous perdez, sinon vous gagnez. Il vous suffit de miser une certaine somme d’argent, dont vous remporterez le double si vous parvenez à me battre, ou bien que vous perdrez si je parviens à vous avoir. Intéressé ?” </p>
+						<p class=\"text-center w-75 mx-auto\"><i> “Le jeu est simple, je vais montrer une direction avec mon doigt, et vous devrez faire en sorte de regarder dans une direction opposée. Si jamais vous ne bougez pas, ou bien que vous regardez dans la direction pointé, vous perdez, sinon vous gagnez. Il vous suffit de miser une certaine somme d’argent, dont vous remporterez le double si vous parvenez à me battre, ou bien que vous perdrez si je parviens à vous avoir. Intéressé ?” </i></p>
 						<a href=\"history.php?id=1&page=9\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Parier 5 pièces d’or </p></a>
 						<a href=\"history.php?id=1&page=1\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
 					";
@@ -169,7 +169,7 @@
 				case "9":
 					$chance = rand(4, 10);
 
-					if ($this->getOr()[0] - 5 > 0) {
+					if ($this->getOr()[0] - 5 < 0) {
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Vous n’avez pas assez d’or pour pouvoir jouer, l’être encapuchonné s’enfonce dans sa chaise en attrapant à nouveau sa chope, vous indiquant par son seul geste qu’il n’est plus intéressé par l’idée de jouer avec vous. </p>
 							<a href=\"history.php?id=1&page=1\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
