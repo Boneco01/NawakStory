@@ -9,8 +9,8 @@
 
 		function inscription($pseudo, $password) {
 			$password = hash("sha256", $password);
-			$req = self::$bdd->prepare('INSERT INTO Aventurier (pseudo, mdp) VALUES (:pseudo, :mdp)');
-			$tuple = array(':pseudo' => $pseudo, ':mdp' => $password);
+			$req = self::$bdd->prepare('INSERT INTO Aventurier (pseudo, mdp, histoire_actuelle) VALUES (:pseudo, :mdp, :histoire_actuelle)');
+			$tuple = array(':pseudo' => $pseudo, ':mdp' => $password, ':histoire_actuelle' => 1);
 			$result = $req->execute($tuple);
 			
 			if ($result) {

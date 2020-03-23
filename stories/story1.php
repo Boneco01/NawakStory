@@ -24,6 +24,32 @@
 			return $tab;
 		}
 
+		// Fonction pour actualiser le nombre de pièces d'or de l'aventurier
+
+		function updateOr($or) {
+			$req = self::$bdd->prepare("UPDATE Aventurier SET or_aventurier = :or_aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":or_aventurier" => $or, ":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+		}
+
+		// Fonction pour récupérer l'histoire actuelle
+
+		function getHistoire() {
+			$req = self::$bdd->prepare("SELECT histoire_actuelle FROM Aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			return $tab;		}
+
+		// Fonction pour définir quelle histoire à été finie
+
+		function histoireActuelle() {
+			$req = self::$bdd->prepare("UPDATE Aventurier SET histoire_actuelle = 2 WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+		}
+
 		// Fonction pour savoir quel texte est à afficher en fonction de la page sur laquelle l'utilisateur se trouve
 
 		function page($page) {
@@ -155,6 +181,12 @@
 						<a href=\"adventure.php\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\">  Récupérer la fiche et se préparer pour partir à l’aventure </p></a>
 
 					";
+
+					var_dump($this->getHistoire()[0]);
+					if ($this->getHistoire()[0] <= 1) {
+						$this->histoireActuelle();
+						var_dump($this->getHistoire()[0]);
+					}
 					break;
 				case "8":
 					echo "
@@ -168,20 +200,27 @@
 					break;
 				case "9":
 					$chance = rand(4, 10);
+					$or = $this->getOr()[0];
 
-					if ($this->getOr()[0] - 5 < 0) {
+					if ($or - 5 < 0) {
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Vous n’avez pas assez d’or pour pouvoir jouer, l’être encapuchonné s’enfonce dans sa chaise en attrapant à nouveau sa chope, vous indiquant par son seul geste qu’il n’est plus intéressé par l’idée de jouer avec vous. </p>
 							<a href=\"history.php?id=1&page=1\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
 						";
 					} else if ($this->getStats()[0][3] > $chance) {
+						$or += 5;
+						$this->updateOr($or);
+
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Visiblement ravi de rencontrer un joueur tel que vous, le maître de ce petit jeu se met à balancer son doigt de droite à gauche doucement, tandis que vous tâchez de rester concentré. Soudain, voilà que sa main se contracte, tandis qu’il s’apprête à pointer une direction. </p>
 							<p class=\"text-center w-75 mx-auto\"> Fort heureusement, dans un réflexe immédiat, vous parvenez à regarder dans une direction opposée au même instant. L’être encapuchonné se met à grogner, tandis qu’il vous tant les 5 pièces d’or que vous avez gagné. </p>
-							<a href=\"history.php?id=1&page=6\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Parier à nouveau 5 pièces d’or </p></a>
-							<a href=\"history.php?id=1&page=6\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
+							<a href=\"history.php?id=1&page=9\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Parier à nouveau 5 pièces d’or </p></a>
+							<a href=\"history.php?id=1&page=1\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> S’en aller </p></a>
 						";
 					} else {
+						$or -= 5;
+						$this->updateOr($or);
+
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Visiblement ravi de rencontrer un joueur tel que vous, le maître de ce petit jeu se met à balancer son doigt de droite à gauche doucement, tandis que vous tâchez de rester concentré. Soudain, voilà que sa main se contracte, tandis qu’il s’apprête à pointer une direction. </p>
 							<p class=\"text-center w-75 mx-auto\"> Malheureusement, son geste rapide semble vous avoir grandement perturbé, et dans la précipitation vous ne pouvez vous empêcher de regarder dans la direction pointé. L’être encapuchonné se met à ricaner, attrapant votre mise pour la fourrer dans l’une de ses poches. </p>
