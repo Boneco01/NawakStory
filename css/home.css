@@ -78,22 +78,50 @@ section h2 {
 	}
 
 	#adventure {
-		height: 100%;
+		height:100%;
 		width:100%;
 	}
 
 	#chronicle {
-		height: 100%;
+		height:100%;
 		width:100%;
 	}
 
 	#adventureText {
-		margin-left: 15%;
-		margin-top: 45%;
+		margin-left:15%;
+		margin-top:45%;
 	}
 	
 	#chronicleText {
-		margin-left: 2%;
-		margin-top: 45%;
+		margin-left:2%;
+		margin-top:45%;
+
+	}
+	#adventure:hover img {
+		filter:none;
+		opacity:1;
+	}
+
+	#adventure span {
+		opacity:1;
+		background-color: lightsalmon;
+		font-size: 18px;
+		padding: 5px;
+		border-radius: 15px;
+		font-family: arial !important;
+	}
+
+	#chronicle:hover img {
+		filter:none;
+		opacity: 1;
+	}
+
+	#chronicle span {
+		opacity: 1;
+		background-color: lightsalmon;
+		font-size: 18px;
+		padding: 5px;
+		border-radius: 15px;
+		font-family: arial !important;
 	}
 }

@@ -13,6 +13,28 @@
 			$tab = $req->fetchAll();
 			return $tab;
 		}
+
+		// Fonction pour récupérer l'histoire actuelle
+
+		function getHistoire() {
+			$req = self::$bdd->prepare("SELECT histoire_actuelle FROM Aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			return $tab;
+		}
+
+		// Fonction pour vérifier si un personnage à été créé 
+
+		function persoIsCreate() {
+			$req = self::$bdd->prepare("SELECT stat_force FROM Aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			return $tab;
+		}
 	}
 
 	/* --- --- --- --- --- */
@@ -23,6 +45,7 @@
 		header('Location: connexion.php');
 	}
 
+	$aventureJouable = $monAventure->getHistoire();
 	$tabAventure = $monAventure->getAdventure();
 
 		echo "
@@ -86,15 +109,27 @@
 				<table class="table">
 					<thead>
 							<?php
-								$tailleListe = count($tabAventure)+1;
-								for($i = 1; $i < $tailleListe; $i++) {
-									echo "
-										<tr>
-											<th scope=\"col\">
-												<img class=\"imgChoixAventure\" id=\"". $i ."\"src=\"".$tabAventure[$i-1][3]."\">
-											</th>
-										</tr>
-									";
+								
+								$tailleListe = count($tabAventure) + 1;
+
+								for ($i = 1; $i < $tailleListe; $i++) {
+									if ($i <= $aventureJouable[0]) {
+										echo "
+											<tr>
+												<th scope=\"col\">
+													<img class=\"imgChoixAventure\" id=\"". $i ."\"src=\"".$tabAventure[$i-1][3]."\">
+												</th>
+											</tr>
+										";
+									} else {
+										echo "
+											<tr>
+												<th scope=\"col\">
+													<img class=\"nonJouable\" id=\"". $i ."\"src=\"".$tabAventure[$i-1][3]."\">
+												</th>
+											</tr>
+										";
+									}
 								}
 							?>
 					</thead>
