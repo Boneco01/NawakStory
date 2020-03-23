@@ -40,72 +40,6 @@
 	/* --- --- --- --- --- */
 
 	$monHistoire = new History();
-
-		$monPersonnage = $monHistoire->getPersonnage();
-		$monSac = $monHistoire->getSac($monPersonnage[0]);
-		$affichageSac = $monHistoire->affichageSac($monSac);
-		$mesInfos = "
-
-			<div id=\"perso\" class=\"py-3 text-center\">
-				<span id=\"idPersonnage\">" . $monPersonnage[0] . "</span>
-				<h3> Nom d'aventurier : " . $monPersonnage[1] . " </h3>
-
-				<div id=\"stats\" class=\"mt-4 pb-4 mx-auto\">
-					<h3 class=\"pt-3\"> Statistiques </h3>
-
-					<div class=\"row valStats\">
-						<span class=\"text-left col-2\"> Force </span>
-						<span class=\"text-left col-1\"> : </span>
-						<span class=\"text-left col-4\"> " . $monPersonnage[3] . " </span>
-					</div>
-
-					<div class=\"row valStats\">
-						<span class=\"text-left col-2\"> Habileté </span>
-						<span class=\"text-left col-1\"> : </span>
-						<span class=\"text-left col-4\"> " . $monPersonnage[4] . " </span>
-					</div>
-
-					<div class=\"row valStats\">
-						<span class=\"text-left col-2\"> Intelligence </span>
-						<span class=\"text-left col-1\"> : </span>
-						<span class=\"text-left col-4\"> " . $monPersonnage[5] . " </span>
-					</div>
-
-					<div class=\"row valStats\">
-						<span class=\"text-left col-2\"> Chance </span>
-						<span class=\"text-left col-1\"> : </span>
-						<span class=\"text-left col-4\"> " . $monPersonnage[6] . " </span>
-					</div>
-				</div>
-
-				<h3 class=\"pt-3 mb-3\"> Inventaire </h3>
-
-				<div id=\"inventory\" class=\"mt-2 row w-100 mx-auto\">
-					<span class=\"col\"> Or : <span id=\"or\"> " . $monPersonnage[7] . " </span></span>
-				</div>
-
-				<div id=\"items\">
-					<tr>
-					<th scope=\"col\">
-						". $affichageSac ."
-					</th>
-				</tr>
-				</div>
-			</div>
-
-            <div id=\"monPopup\" class=\"popup\">
-                <!-- Contenu du popup-->
-                <div class=\"contenuPopup\">
-                    <span class=\"fermer\" onclick=\"fermerPopup()\">&times;</span>
-                    <div id=\"infosObjetPopup\">
-                    	<h2></h2>
-                    	<img src=\"\" alt=\"#\" class=\"mx-auto d-block\" style=\"width: 200px\">
-                    	<p class=\"mx-auto d-block\"></p>
-                    	<button class=\"mx-auto d-block\">Acheter : </button>
-                    </div>
-                </div>
-            </div>
-		";
 ?>
 
 <!DOCTYPE html>
@@ -178,6 +112,71 @@
 						});
 
 						</script>
+					";
+
+					$monPersonnage = $monHistoire->getPersonnage();
+					$monSac = $monHistoire->getSac($monPersonnage[0]);
+					$affichageSac = $monHistoire->affichageSac($monSac);
+					$mesInfos = "
+						<div id=\"perso\" class=\"py-3 text-center\">
+							<span id=\"idPersonnage\">" . $monPersonnage[0] . "</span>
+							<h3> Nom d'aventurier : " . $monPersonnage[1] . " </h3>
+
+							<div id=\"stats\" class=\"mt-4 pb-4 mx-auto\">
+								<h3 class=\"pt-3\"> Statistiques </h3>
+
+								<div class=\"row valStats\">
+									<span class=\"text-left col-2\"> Force </span>
+									<span class=\"text-left col-1\"> : </span>
+									<span class=\"text-left col-4\"> " . $monPersonnage[3] . " </span>
+								</div>
+
+								<div class=\"row valStats\">
+									<span class=\"text-left col-2\"> Habileté </span>
+									<span class=\"text-left col-1\"> : </span>
+									<span class=\"text-left col-4\"> " . $monPersonnage[4] . " </span>
+								</div>
+
+								<div class=\"row valStats\">
+									<span class=\"text-left col-2\"> Intelligence </span>
+									<span class=\"text-left col-1\"> : </span>
+									<span class=\"text-left col-4\"> " . $monPersonnage[5] . " </span>
+								</div>
+
+								<div class=\"row valStats\">
+									<span class=\"text-left col-2\"> Chance </span>
+									<span class=\"text-left col-1\"> : </span>
+									<span class=\"text-left col-4\"> " . $monPersonnage[6] . " </span>
+								</div>
+							</div>
+
+							<h3 class=\"pt-3 mb-3\"> Inventaire </h3>
+
+							<div id=\"inventory\" class=\"mt-2 row w-100 mx-auto\">
+								<span class=\"col\"> Or : <span id=\"or\"> " . $monPersonnage[7] . " </span></span>
+							</div>
+
+							<div id=\"items\">
+								<tr>
+								<th scope=\"col\">
+									". $affichageSac ."
+								</th>
+							</tr>
+							</div>
+						</div>
+
+			            <div id=\"monPopup\" class=\"popup\">
+			                <!-- Contenu du popup-->
+			                <div class=\"contenuPopup\">
+			                    <span class=\"fermer\" onclick=\"fermerPopup()\">&times;</span>
+			                    <div id=\"infosObjetPopup\">
+			                    	<h2></h2>
+			                    	<img src=\"\" alt=\"#\" class=\"mx-auto d-block\" style=\"width: 200px\">
+			                    	<p class=\"mx-auto d-block\"></p>
+			                    	<button class=\"mx-auto d-block\">Acheter : </button>
+			                    </div>
+			                </div>
+			            </div>
 					";
 
 					echo "<div id=\"divInfosAventurier\">". $mesInfos ."</div>";

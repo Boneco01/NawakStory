@@ -393,6 +393,9 @@
 					";
 
 					if ($this->getStats()[0][3] > $chance) {
+						$or += 100;
+						$this->updateOr($or);
+
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Cependant, un détail attire votre attention : votre informateur jette de furtifs coups d’oeil derrière lui. C’est à ce moment que vous remarquez que vous êtes suivis d’assez loin, par 3 hommes cagoulés, assez costauds. </p>
 							<p class=\"text-center w-75 mx-auto\"> Bizarrement, depuis que vous les avez regardé, l’informateur ne jette plus aucun coup d’oeil, et continue de déblatérer sur la pluie et le beau temps. Quelque chose ne tourne pas rond. </p>
@@ -401,6 +404,9 @@
 							<a href=\"history.php?id=2&page=19\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Retourner dans la ville </p></a>
 						";	
 					} else {
+						$or += 0;
+						$this->updateOr($or);
+
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Vous continuez d’écouter l’homme raconter sa vie, ne vous doutant de rien. Quand soudain, vous ressentez une violente douleur à la tête et vous tombez par terre, sonné. </p>
 							<p class=\"text-center w-75 mx-auto\"> Au moment ou vous reprenez conscience, vous vous estimez chanceux qu’il n’ait pas pris votre vie ! Malgré tout, il ne vous reste plus un sou ni aucun de vos objets car votre besace vous à été dérobée. </p>
@@ -453,9 +459,12 @@
 					";
 
 					if ($this->getStats()[0][3] > $chance) {
+						$or += 25;
+						$this->updateOr($or);
+
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Au moment ou vous rapprochez de l’escalier, un élément attire votre oeil : un mur en mosaïque représentant l’univers. Cependant, un carreau ne semble pas être à sa place. Vous décidez d’appuyer dessus, quand soudain, le mur se met à trembler. </p>
-							<p class=\"text-center w-75 mx-auto\"> Une cavité se découvre à vous, révélant une petite bourse de 50 pièces d’or. Heureux de votre trouvaille, vous l’empochez, content de voir votre pactole augmenter. </p>
+							<p class=\"text-center w-75 mx-auto\"> Une cavité se découvre à vous, révélant une petite bourse de 25 pièces d’or. Heureux de votre trouvaille, vous l’empochez, content de voir votre pactole augmenter. </p>
 						";
 					}
 

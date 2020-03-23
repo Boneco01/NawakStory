@@ -182,10 +182,8 @@
 
 					";
 
-					var_dump($this->getHistoire()[0]);
 					if ($this->getHistoire()[0] <= 1) {
 						$this->histoireActuelle();
-						var_dump($this->getHistoire()[0]);
 					}
 					break;
 				case "8":
