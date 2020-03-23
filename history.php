@@ -4,7 +4,7 @@
 	include './connexionBD.php';
 
 	class History extends ConnexionBD {
-
+		
 	}
 
 	/* --- --- --- --- --- */
