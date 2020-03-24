@@ -10,6 +10,23 @@
 			$result = $req->execute($tuple);
 
 			$tab = $req->fetchAll();
+			$objets = $this->getSac($this->getIdAventurier()[0]);
+			$nbObjets = count($objets);
+			for($i = 0; $i < $nbObjets; $i++) {
+				$tab[0][0] = intval($tab[0][0])+intval($objets[$i][5]);
+				$tab[0][1] = intval($tab[0][1])+intval($objets[$i][6]);
+				$tab[0][2] = intval($tab[0][2])+intval($objets[$i][7]);
+				$tab[0][3] = intval($tab[0][3])+intval($objets[$i][8]);
+			}
+			return $tab;
+		}
+
+		function getSac($id_aventurier) {
+			$req = self::$bdd->prepare('SELECT * FROM objet INNER JOIN sac using(id_objet) WHERE id_aventurier = :id_aventurier');
+			$tuple = array(":id_aventurier" => $id_aventurier);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetchAll();
 			return $tab;
 		}
 
@@ -48,6 +65,25 @@
 			$req = self::$bdd->prepare("UPDATE Aventurier SET histoire_actuelle = 2 WHERE pseudo = :pseudo");
 			$tuple = array(":pseudo" => $_SESSION['pseudo']);
 			$result = $req->execute($tuple);
+		}
+
+		// Fonction pour ajouter un objet dans notre sac
+
+		function addObject($id_aventurier, $id_objet) {
+			$req = self::$bdd->prepare("INSERT INTO Sac (id_aventurier, id_objet) VALUES (:id_aventurier, :id_objet)");
+			$tuple = array(":id_aventurier" => intval($id_aventurier[0]), ":id_objet" => $id_objet);
+			$result = $req->execute($tuple);
+		}
+
+		// Fonction pour récupérer l'id de l'aventurier actuel
+
+		function getIdAventurier() {
+			$req = self::$bdd->prepare("SELECT id_aventurier FROM Aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			return $tab;
 		}
 
 		// Fonction pour savoir quel texte est à afficher en fonction de la page sur laquelle l'utilisateur se trouve
@@ -90,6 +126,8 @@
 					$chance = rand(4, 10);
 
 					if ($this->getStats()[0][0] > 10) {
+						$id_aventurier = $this->getIdAventurier();
+						$this->addObject($id_aventurier, 7);
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> L’ivrogne se jetant sur vous, vous l’accueillez en bonne et due forme en lui portant votre poing à la figure. L’une de ses dents s’échappe de sa bouche, alors qu’il s’écrase de nouveau en arrière, cette fois inconscient. Soupirant, la tavernière tapote sur sa robe afin de la défroisser, vous adressant un large sourire. </p>
 							<p class=\"text-center w-75 mx-auto\"><i> “Les énergumènes dans son genre sont nombreux ici, j’y suis habituée, mais merci pour votre aide ! Tenez, en gage de ma gratitude, prenez-en soin.” </i></p>

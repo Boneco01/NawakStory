@@ -71,6 +71,11 @@
 	cursor: pointer;
 }
 
+p {
+    font-family: arial !important;
+    font-size: 16px !important;
+}
+
 /* ---------- POPUP ----------
    ----------------------------- */
 

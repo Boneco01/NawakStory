@@ -32,6 +32,15 @@
 			$result = $req->execute($tuple);
 
 			$tab = $req->fetch();
+
+			$objets = $this->getSac($tab[0]);
+			$nbObjets = count($objets);
+			for($i = 0; $i < $nbObjets; $i++) {
+				$tab[3] = intval($tab[3])+intval($objets[$i][5]);
+				$tab[4] = intval($tab[4])+intval($objets[$i][6]);
+				$tab[5] = intval($tab[5])+intval($objets[$i][7]);
+				$tab[6] = intval($tab[6])+intval($objets[$i][8]);
+			}
 			return $tab;
 		}
 
@@ -105,7 +114,7 @@
 
 	switch ($monAction) {
 		case "ajouté":
-			$maCaserne->insertionPersonnage(10);
+			$maCaserne->insertionPersonnage(30);
 			break;
 		default:
 			break;
@@ -116,8 +125,8 @@
 			<div id=\"perso\" class=\"py-3 text-center\">
 				<h3> Création de votre personnage </h3>
 
-				<p class=\"w-75 textIntro mt-3\"> Après avoir réglé tous les papiers d'inscription, vous rencontrez le chef de la guilde. Celui-ci vous propose différentes classes qui serviront à votre perso. Il vous explique que chacune d'entre elles ont des statistiques et des caractéristiques différentes. Selon la classe que vous choisirez, votre aventure et vos choix seront différents. A vous de faire le bon choix en fonction de votre caractère ! </p>
-				<p class=\"w-75 textIntro\"> Voici les différentes classes qui vous sont proposées : </p>
+				<p class=\"w-75 textIntro mt-3\"> Après avoir réglé tous les papiers d'inscription, vous rencontrez le chef de la guilde. Celui-ci vous demande de signer un document attestant de vos compétences principales, afin que la guilde puisse savoir quels types d'aventuriers elle compte dans ses rangs. Selon votre profil, vous pourrez être amené à choisir des chemins différents à travers vos aventures. A vous de faire le bon choix en fonction de votre caractère ! </p>
+				<p class=\"w-75 textIntro\"> Veuillez choisir le profil qui vous correspond le mieux : </p>
 
 				<script type=\"text/javascript\">
 					function stats(a) {

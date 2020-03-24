@@ -13,6 +13,14 @@
 			$result = $req->execute($tuple);
 
 			$tab = $req->fetch();
+			$objets = $this->getSac($tab[0]);
+			$nbObjets = count($objets);
+			for($i = 0; $i < $nbObjets; $i++) {
+				$tab[3] = intval($tab[3])+intval($objets[$i][5]);
+				$tab[4] = intval($tab[4])+intval($objets[$i][6]);
+				$tab[5] = intval($tab[5])+intval($objets[$i][7]);
+				$tab[6] = intval($tab[6])+intval($objets[$i][8]);
+			}
 			return $tab;
 		}
 
@@ -35,11 +43,43 @@
 			return $affichageSac;
 		}
 
+		function getHistoire() {
+			$req = self::$bdd->prepare("SELECT histoire_actuelle FROM Aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			return $tab;
+		}
+
+		function persoIsCreate() {
+			$req = self::$bdd->prepare("SELECT stat_force FROM Aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetch();
+			return $tab;
+		}
+
 	}
 
 	/* --- --- --- --- --- */
 
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+	}
+
 	$monHistoire = new History();
+	if (!isset($_SESSION['pseudo'])) {
+		header('Location: connexion.php');
+	}
+	if ($monHistoire->getHistoire()[0] < $id) {
+		header('Location: adventure.php');
+	}
+
+	if ($monHistoire->persoIsCreate()[0] == 0) {
+		header('Location: barrack.php');
+	}
 ?>
 
 <!DOCTYPE html>
@@ -55,9 +95,6 @@
 		<section class="mx-auto">
 			<div class="w-75 pb-1 mx-auto">
 				<?php
-					if (isset($_GET['id'])) {
-						$id = $_GET['id'];
-					}
 
 					switch ($id) {
 						case '1':

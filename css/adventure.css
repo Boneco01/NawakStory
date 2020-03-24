@@ -80,6 +80,10 @@ table img:hover {
 	cursor: pointer;
 }
 
+.nonJouable {
+    opacity: 0.5;
+}
+
 @media screen and (max-width: 1024px) {
 	#adventureSelect {
 		display: block !important;

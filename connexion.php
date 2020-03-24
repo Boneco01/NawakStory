@@ -73,20 +73,10 @@
 					<p class="mx-5 mt-4 text-center d-none d-lg-block px-2"><em> Bonjour à toi aveturier, prêt à partir pour de nouvelles aventures palpipantes ? Qu'allez-vous explorer cette fois-ci : une jungle aux multiples dangers, des manoirs hantés par de dangereux spectres ? </em></p>
 					<p class="mx-5 mt-4 text-center"><em> Avant de partir en exploration, nous avons besoin que vous vous identifiez dans notre guilde pour que l'on puisse vous assurer en cas de pépin. </em></p>
 
-					<script type="text/javascript">
-						function verifForm() {
-							if (document.getElementById("field1").value != "" && document.getElementById("field2").value != "") {
-								document.getElementById("button").disabled = false;
-							} else {
-								document.getElementById("button").disabled = true;
-							}
-						}
-					</script>
-
 					<form action="connexion.php?action=connect" method="post" class="pb-3 w-100">
-						<input type="text" name="pseudo" placeholder="Pseudo" class="text-center mb-3 fields w-25" id="field1"  onchange="verifForm()">
-						<input type="password" name="password" placeholder="Mot de passe" class="text-center mb-3 fields w-25" id="field2" onchange="verifForm()">
-						<button class="d-block text-dark rounded-lg w-25 mx-auto fields" type="submit" disabled="true" id="button"> S'identifier </button>
+						<input type="text" name="pseudo" placeholder="Pseudo" class="text-center mb-3 fields w-25" id="field1" required>
+						<input type="password" name="password" placeholder="Mot de passe" class="text-center mb-3 fields w-25" id="field2" required>
+						<input type="submit" value="S'identifier" class="d-block text-dark rounded-lg w-25 mx-auto fields" id="button">
 					</form>
 				
 					<div id="redirection" class="w-50 mx-auto text-center pb-3">

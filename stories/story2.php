@@ -10,6 +10,23 @@
 			$result = $req->execute($tuple);
 
 			$tab = $req->fetchAll();
+			$objets = $this->getSac($this->getIdAventurier()[0]);
+			$nbObjets = count($objets);
+			for($i = 0; $i < $nbObjets; $i++) {
+				$tab[0][0] = intval($tab[0][0])+intval($objets[$i][5]);
+				$tab[0][1] = intval($tab[0][1])+intval($objets[$i][6]);
+				$tab[0][2] = intval($tab[0][2])+intval($objets[$i][7]);
+				$tab[0][3] = intval($tab[0][3])+intval($objets[$i][8]);
+			}
+			return $tab;
+		}
+
+		function getSac($id_aventurier) {
+			$req = self::$bdd->prepare('SELECT * FROM objet INNER JOIN sac using(id_objet) WHERE id_aventurier = :id_aventurier');
+			$tuple = array(":id_aventurier" => $id_aventurier);
+			$result = $req->execute($tuple);
+
+			$tab = $req->fetchAll();
 			return $tab;
 		}
 
@@ -22,6 +39,14 @@
 
 			$tab = $req->fetch();
 			return $tab;
+		}
+
+		// Fonction pour actualiser le nombre de pièces d'or de l'aventurier
+
+		function updateOr($or) {
+			$req = self::$bdd->prepare("UPDATE Aventurier SET or_aventurier = :or_aventurier WHERE pseudo = :pseudo");
+			$tuple = array(":or_aventurier" => $or, ":pseudo" => $_SESSION['pseudo']);
+			$result = $req->execute($tuple);
 		}
 
 		// Fonction pour récupérer l'id de l'aventurier actuel
@@ -273,16 +298,16 @@
 
 						if ($this->getStats()[0][3] > $chance) {
 							echo "
-								<p class=\"text-center w-75 mx-auto\"> Par mégarde, avant de briser la dernière pierre, vous n’avez pas pris en compte que les tentacules pouvait vous atteindre. Une des tentacules de la créature vous touche, vous projetant avec une force inouïe sur une des colonnes entourant le bassin. Vous vous écrasez dessus, et mourez sur le coup. </p>
-								<a href=\"adventure.php\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Retour à la page des aventures </p></a>
-							";
-						} else {
-							echo "
 								<p class=\"text-center w-75 mx-auto\"> Grâce aux pierres brisées, le monstre ne sait pas où frapper et ne vous touche pas. Vous arrivez devant la dernière pierre. Au moment ou vous briser celle-ci, le monstre poussa un dernier hurlement, avant de se dissoudre dans le bassin. Heureux de votre victoire, vous entendez cependant un cri de désespoir. </p>
 								<p class=\"text-center w-75 mx-auto\"><i> “NOOOOOOOOOOOOOOON !!!”.  </i></p>
 								<p class=\"text-center w-75 mx-auto\"> Vous vous retournez et voyez l’informateur, courant vers vous, une sorte de lourde masse à la main. Vous ressentez une haine profonde émaner de lui. </p>
 								<a href=\"history.php?id=2&page=14\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Combattre l’informateur </p></a>
 								<a href=\"history.php?id=2&page=33\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Tenter de le raisonner </p></a>
+							";
+						} else {
+							echo "
+								<p class=\"text-center w-75 mx-auto\"> Par mégarde, avant de briser la dernière pierre, vous n’avez pas pris en compte que les tentacules pouvait vous atteindre. Une des tentacules de la créature vous touche, vous projetant avec une force inouïe sur une des colonnes entourant le bassin. Vous vous écrasez dessus, et mourez sur le coup. </p>
+								<a href=\"adventure.php\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Retour à la page des aventures </p></a>
 							";
 						}
 					} else {
@@ -459,6 +484,7 @@
 					";
 
 					if ($this->getStats()[0][3] > $chance) {
+						$or = $this->getOr();
 						$or += 25;
 						$this->updateOr($or);
 
@@ -591,7 +617,7 @@
 						<p class=\"text-center w-75 mx-auto\"> Vous agrippez le garde et le menacez avec votre voix la plus grave. </p>
 					";
 
-					if (($this->getStats() > 6 && $this->getStats()[0][3] > $chance) || $this->getStats()[0][3] > $chance) {
+					if (($this->getStats() > 6 && $this->getStats()[0][3] > $chance) || $this->getStats()[0][0] > 10) {
 						echo "
 							<p class=\"text-center w-75 mx-auto\"> Le garde n’est plus aussi confiant et baisse les yeux. Vous levez le poing et à cet instant, il vous supplie de le laisser tranquille et vous invite avec un minimum de courtoisie à entrer dans la ville. </p>
 							<a href=\"history.php?id=2&page=4\" class=\"linkToRedirect\"><p class=\"text-center w-75 mx-auto\"> Entrer dans la ville </p></a>

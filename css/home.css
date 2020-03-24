@@ -24,9 +24,10 @@ section h2 {
 }
 
 #chronicleText {
+	width: 100%;
+	padding: 10px;
+	background-color: #cfb19e;
 	font-size: 20px;
-	margin-left: 28%;
-	margin-top: 45%;
 	opacity: 0;
 	transition-duration: 1s;
 	transition-property: opacity;
@@ -53,9 +54,10 @@ section h2 {
 }
 
 #adventureText {
+	width: 100%;
+	padding: 10px;
+	background-color: #cfb19e;
 	font-size: 20px;
-	margin-left: 33%;
-	margin-top: 45%;
 	opacity: 0;
 	transition-duration: 1s;
 	transition-property: opacity;
@@ -86,17 +88,6 @@ section h2 {
 		height:100%;
 		width:100%;
 	}
-
-	#adventureText {
-		margin-left:15%;
-		margin-top:45%;
-	}
-	
-	#chronicleText {
-		margin-left:2%;
-		margin-top:45%;
-
-	}
 	#adventure:hover img {
 		filter:none;
 		opacity:1;
@@ -104,11 +95,7 @@ section h2 {
 
 	#adventure span {
 		opacity:1;
-		background-color: lightsalmon;
-		font-size: 18px;
-		padding: 5px;
-		border-radius: 15px;
-		font-family: arial !important;
+		border-left: 0.5px solid black;
 	}
 
 	#chronicle:hover img {
@@ -117,11 +104,6 @@ section h2 {
 	}
 
 	#chronicle span {
-		opacity: 1;
-		background-color: lightsalmon;
-		font-size: 18px;
-		padding: 5px;
-		border-radius: 15px;
-		font-family: arial !important;
+		opacity:1;
 	}
 }

@@ -45,6 +45,10 @@
 		header('Location: connexion.php');
 	}
 
+	if ($monAventure->persoIsCreate()[0] == 0) {
+		header('Location: barrack.php');
+	}
+
 	$aventureJouable = $monAventure->getHistoire();
 	$tabAventure = $monAventure->getAdventure();
 
